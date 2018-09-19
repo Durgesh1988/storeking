@@ -7,6 +7,22 @@ const config = require('../config/store-king-settings');
 const { secret } = config.jwt;
 
 module.exports.setRoutes = function(app) {
+    /**
+     *
+     * @api {post} /profile
+     * @apiName Create User Profile
+     * @apiDescription Register User into application
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} name User Name
+     * @apiParam {String} email_id User Email
+     * @apiParam {String} password Password
+     * @apiParam {String} confirm_password Confirm Password
+     *
+     * @apiSuccess (200) {String} message description
+     *
+     */
     app.post('/profile',validate(profileValidator.createNew), (req, res, next) => {
         verifySession(req,(err,authenticated) => {
             if (err) {
@@ -22,6 +38,23 @@ module.exports.setRoutes = function(app) {
             }
         });
     });
+
+    /**
+     *
+     * @api {patch} /profile/:profile_id Update Profile
+     * @apiName Update User Profile
+     * @apiDescription Update User Info
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} name User Name
+     * @apiParam {String} email_id User Email
+     * @apiParam {String} password Password
+     * @apiParam {String} confirm_password Confirm Password
+     *
+     * @apiSuccess (200) {String} message description
+     *
+     */
 
     app.patch('/profile/:profile_id',validate(profileValidator.updateProfile), (req, res, next) =>{
         verifySession(req,(err,authenticated) => {
@@ -39,6 +72,21 @@ module.exports.setRoutes = function(app) {
         });
     });
 
+
+    /**
+     *
+     * @api {get} /profile/:profile_id User Profile
+     * @apiName Get User Profile
+     * @apiDescription Get User Info based on Profile ID
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} profile_id User Profile ID
+     *
+     * @apiSuccess (200) {String} message description
+     *
+     */
+
     app.get('/profile/:profile_id',validate(profileValidator.get),(req, res, next) => {
         verifySession(req,(err,authenticated) => {
             if (err) {
@@ -54,6 +102,20 @@ module.exports.setRoutes = function(app) {
             }
         });
     });
+
+    /**
+     *
+     * @api {delete} /profile/:profile_id Delele User Profile
+     * @apiName Delete a User Profile
+     * @apiDescription Delete User Info based on Profile ID
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} profile_id User Profile ID
+     *
+     * @apiSuccess (200) {String} message description
+     *
+     */
 
     app.delete('/profile/:profile_id',validate(profileValidator.get), (req, res, next) => {
         verifySession(req,(err,authenticated) => {
@@ -71,6 +133,19 @@ module.exports.setRoutes = function(app) {
         });
     });
 
+    /**
+     *
+     * @api {get} /profile User Profiles
+     * @apiName Get all Users Profile with Pagination,Filter, Sort and Search
+     * @apiDescription Get all Users Profile with Pagination,Filter, Sort and Search
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     *
+     * @apiSuccess (200) {String} message description
+     *
+     */
+
     app.get('/profile', (req, res, next) => {
         verifySession(req,(err,authenticated) => {
             if (err) {
@@ -87,6 +162,19 @@ module.exports.setRoutes = function(app) {
         })
     });
 
+    /**
+     *
+     * @api {get} /profile/:user_name/comments User Comments
+     * @apiName Get a User's Post Comment
+     * @apiDescription Get a User's Post Comment
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} user_name User Email ID
+     * @apiSuccess (200) {String} message description
+     *
+     */
+
     app.get('/profile/:user_name/comments',validate(profileValidator.getPostComments), (req, res, next) => {
         verifySession(req,(err,authenticated) => {
             if (err) {
@@ -102,6 +190,18 @@ module.exports.setRoutes = function(app) {
             }
         })
     });
+    /**
+     *
+     * @api {get} /profile/:user_name/comments/dashboard User's Comment Performance
+     * @apiName Get a User's Post Comment Performance
+     * @apiDescription Get a User's Post Comment Performance
+     * @apiGroup Profile
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} user_name User Email ID
+     * @apiSuccess (200) {String} message description
+     *
+     */
 
     app.get('/profile/:user_name/comments/dashboard',validate(profileValidator.getPostComments), (req, res, next) => {
         verifySession(req,(err,authenticated) => {
