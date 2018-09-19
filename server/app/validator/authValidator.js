@@ -8,7 +8,7 @@ authValidator.signUp = {
         email_id: Joi.string().min(5).max(50).required(),
         password: Joi.string().min(1).max(20).required(),
         confirm_password: Joi.string().min(1).max(20).required(),
-        image_id: Joi.string().min(1).max(20).required()
+        image_id: Joi.string().min(1).max(50).required()
     }
 };
 

@@ -1,6 +1,7 @@
 const auth = require('./routes_auth');
 const profile = require('./routes_profile');
 const comment = require('./routes_post_comments');
+const fileUpload = require('./routes_file_upload');
 const logger = require('../logger/logger')(module);
 
 module.exports.setRoutes = function(app) {
@@ -8,6 +9,7 @@ module.exports.setRoutes = function(app) {
     auth.setRoutes(app);
     profile.setRoutes(app);
     comment.setRoutes(app);
+    fileUpload.setRoutes(app);
     app.use(errorHandler);
 
     function errorHandler(err, req, res, next) {

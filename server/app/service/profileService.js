@@ -119,9 +119,9 @@ profileService.getPostCommentDashboard = function getPostCommentDashboard(email_
                 comment_dashboard.total_like = comment_dashboard.total_like + comment.likes.length;
                 comment_dashboard.total_comment = comment_dashboard.total_comment + comment.comments.length;
             });
-            return (null,comment_dashboard);
+            return callback(null,comment_dashboard);
         }else
-            return (null,comment_dashboard);
+            return callback(null,comment_dashboard);
     })
 };
 

@@ -10,6 +10,7 @@ const profileService = require('../service/profileService');
 const authService = module.exports = {};
 
 authService.login = function login(reqBody,callback) {
+    console.log(reqBody);
     profiles.getProfiles({email_id:reqBody.email_id},(err,profile) =>{
         if(err)
             return callback(err,null);

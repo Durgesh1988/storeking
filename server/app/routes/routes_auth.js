@@ -21,8 +21,8 @@ module.exports.setRoutes = function(app) {
      * @apiSuccess (200) {String} message description
      *
      */
-    app.post('/auth/login',validate(authValidator.login), function(req, res, next) {
-        authService.login(req.body,function(err,login){
+    app.post('/auth/login',validate(authValidator.login), (req, res, next)=> {
+        authService.login(req.body,(err,login) => {
             if(err){
                 return res.status(500).send(err);
             }else{
@@ -46,8 +46,8 @@ module.exports.setRoutes = function(app) {
      * @apiSuccess (200) {String} message description
      *
      */
-    app.post('/auth/sign-up',validate(authValidator.login), function(req, res, next) {
-        authService.signUp(req.body,function(err,login){
+    app.post('/auth/sign-up',validate(authValidator.signUp), (req, res, next) => {
+        authService.signUp(req.body,(err,login) => {
             if(err){
                 return res.status(500).send(err);
             }else{
@@ -70,10 +70,10 @@ module.exports.setRoutes = function(app) {
      *
      */
 
-    app.patch('/auth/logout',validate(authValidator.logout),  function(req, res, next) {
+    app.patch('/auth/logout',validate(authValidator.logout), (req, res, next) => {
         req.logout();
         req.session.destroy();
-        authService.logout(req.body,function(err,logout){
+        authService.logout(req.body,(err,logout) => {
             if(err){
                 return res.status(500).send(err);
             }else{
@@ -98,7 +98,7 @@ module.exports.setRoutes = function(app) {
      *
      */
 
-    app.patch('/auth/reset-password',validate(authValidator.resetPassword),function(req, res, next) {
+    app.patch('/auth/reset-password',validate(authValidator.resetPassword),(req, res, next) =>  {
         const token = req.headers['token'];
         if (!token)
             return callback({error_code:401,auth: false, message: 'No token provided.' },null);
@@ -106,7 +106,7 @@ module.exports.setRoutes = function(app) {
             if (err)
                 return callback({error_code: 500, auth: false, message: 'Failed to authenticate token.'}, null);
             else {
-                authService.resetPassword(req.body, function (err, resetPassword) {
+                authService.resetPassword(req.body, (err, resetPassword) => {
                     if (err) {
                         return res.status(500).send(err);
                     } else {
@@ -131,8 +131,8 @@ module.exports.setRoutes = function(app) {
      *
      */
 
-    app.patch('/auth/forget-password',validate(authValidator.forgetPassword),function(req, res, next) {
-        authService.forgetPassword(req.body,function(err,resetPassword){
+    app.patch('/auth/forget-password',validate(authValidator.forgetPassword),(req, res, next) => {
+        authService.forgetPassword(req.body,(err,resetPassword) => {
             if(err){
                 return res.status(500).send(err);
             }else{

@@ -4,6 +4,7 @@ const apiUtil = require('../utils/apiUtil');
 const uuid = require('node-uuid');
 
 module.exports.setRoutes = function(app) {
+
     app.post('/file-upload', function(req, res) {
         if(req.files && req.files.file) {
             let fileId = req.query.fileId;

@@ -8,8 +8,7 @@ const mongoosePaginate = require('mongoose-paginate');
 const profileSchema = new Schema({
     name:{
         type:String,
-        required:true,
-        unique:false
+        required:true
     },
     email_id:{
         type:String,
@@ -134,7 +133,7 @@ profileSchema.statics.getPostCommentDashboard = function getPostCommentDashboard
         if (err) {
             return callback(err, null);
         }else{
-            return callback(null,postComments)
+            return callback(null,postComments[0])
         }
     })
 };

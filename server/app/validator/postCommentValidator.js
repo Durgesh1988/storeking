@@ -13,7 +13,7 @@ postCommentValidator.getComments = {
 postCommentValidator.postComment = {
     body: {
         email_id: Joi.string().min(5).max(50).required(),
-        image_id: Joi.string().min(1).max(20).required(),
+        image_id: Joi.string().min(1).max(50).required(),
         desc: Joi.string().min(1).max(250).required()
     }
 };
@@ -23,7 +23,7 @@ postCommentValidator.updateComment = {
         comment_id: Joi.string().min(1).max(40).required()
     },
     body: {
-        image_id: Joi.string().min(1).max(20).required(),
+        image_id: Joi.string().min(1).max(50).required(),
         desc: Joi.string().min(1).max(250).required()
     }
 };

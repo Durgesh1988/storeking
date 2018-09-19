@@ -164,23 +164,23 @@ module.exports.setRoutes = function(app) {
 
     /**
      *
-     * @api {get} /profile/:user_name/comments User Comments
+     * @api {get} /profile/comments/list User Comments
      * @apiName Get a User's Post Comment
      * @apiDescription Get a User's Post Comment
      * @apiGroup Profile
      * @apiVersion 1.0.0
      *
-     * @apiParam {String} user_name User Email ID
+     * @apiParam {String} email_id User Email ID
      * @apiSuccess (200) {String} message description
      *
      */
 
-    app.get('/profile/:user_name/comments',validate(profileValidator.getPostComments), (req, res, next) => {
+    app.get('/profile/comments/list',validate(profileValidator.getPostComments), (req, res, next) => {
         verifySession(req,(err,authenticated) => {
             if (err) {
                 return res.send(err);
             } else {
-                profileService.getPostComments(req.params.user_name, (err, comments) => {
+                profileService.getPostComments(req.query.email_id, (err, comments) => {
                     if (err) {
                         return res.status(500).send(err);
                     } else {
@@ -192,23 +192,23 @@ module.exports.setRoutes = function(app) {
     });
     /**
      *
-     * @api {get} /profile/:user_name/comments/dashboard User's Comment Performance
+     * @api {get} /profile/comments/dashboard User's Comment Performance
      * @apiName Get a User's Post Comment Performance
      * @apiDescription Get a User's Post Comment Performance
      * @apiGroup Profile
      * @apiVersion 1.0.0
      *
-     * @apiParam {String} user_name User Email ID
+     * @apiParam {String} email_id User Email ID
      * @apiSuccess (200) {String} message description
      *
      */
 
-    app.get('/profile/:user_name/comments/dashboard',validate(profileValidator.getPostComments), (req, res, next) => {
+    app.get('/profile/comments/dashboard',validate(profileValidator.getPostComments), (req, res, next) => {
         verifySession(req,(err,authenticated) => {
             if (err) {
                 return res.send(err);
             } else {
-                profileService.getPostCommentDashboard(req.params.user_name, (err, dashboardData) => {
+                profileService.getPostCommentDashboard(req.query.email_id, (err, dashboardData) => {
                     if (err) {
                         return res.status(500).send(err);
                     } else {
